@@ -14,6 +14,20 @@
       ];
     in
     {
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            packages = [
+              pkgs.nixfmt
+            ];
+          };
+        }
+      );
+
       packages = forAllSystems (
         system:
         let
